@@ -1,2 +1,2 @@
 # cloudwatch-sql-dashboard-builder
-Generate a Cloudwatch Dashboard from Cloudwatch SQL metrics
+Generate a Cloudwatch Dashboard from Cloudwatch metrics (including sql queries).

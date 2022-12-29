@@ -1,0 +1,82 @@
+{
+    "cloudwatch_sql": {
+        "ApplicationELB": [
+            {
+                "schema": "AWS/ApplicationELB",
+                "templates": [
+                    {
+                        "name": "Total Requests",
+                        "desc": "Total requests across all load balancers",
+                        "sql": "SELECT SUM(RequestCount) FROM SCHEMA(\"AWS/ApplicationELB\", LoadBalancer)"
+                    },
+                    {
+                        "name": "Active Connections Count",
+                        "desc": "Top 10 most active load balancers",
+                        "sql": "SELECT MAX(ActiveConnectionCount) FROM SCHEMA(\"AWS/ApplicationELB\", LoadBalancer) GROUP BY LoadBalancer ORDER BY SUM() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "DynamoDB": [
+            {
+                "schema": "AWS/DynamoDB",
+                "templates": [
+                    {
+                        "name": "Top 10 Consumed Reads Tables",
+                        "desc": "Top 10 tables by consumed reads",
+                        "sql": "SELECT SUM(ProvisionedWriteCapacityUnits) FROM SCHEMA(\"AWS/DynamoDB\", TableName) GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 Returned Bytes Tables",
+                        "desc": "Top 10 tables by returned bytes",
+                        "sql": "SELECT SUM(ReturnedBytes) FROM SCHEMA(\"AWS/DynamoDB\", TableName)  GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 tables by user errors",
+                        "desc": "Top 10 tables by user errors",
+                        "sql": "SELECT SUM(UserErrors) FROM SCHEMA(\"AWS/DynamoDB\", TableName) GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "Lambda": [
+            {
+                "schema": "AWS/Lambda",
+                "templates": [
+                    {
+                        "name": "Number of Invocations",
+                        "desc": "Lambda functions ordered by number of invocations",
+                        "sql": "SELECT SUM(Invocations) FROM SCHEMA(\"AWS/Lambda\",FunctionName) GROUP BY FunctionName ORDER BY SUM() DESC"
+                    },
+                    {
+                        "name": "Top 10 Longest Runtime Func",
+                        "desc": "Top 10 Lambda functions by longest runtime",
+                        "sql": "SELECT AVG(Duration) FROM SCHEMA(\"AWS/Lambda\",FunctionName) GROUP BY FunctionName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 Error Count Func",
+                        "desc": "Top 10 Lambda functions by error count",
+                        "sql": "SELECT SUM(Errors) FROM SCHEMA(\"AWS/Lambda\", FunctionName) GROUP BY FunctionName ORDER BY SUM() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "API": [
+            {
+                "schema": "AWS/Usage",
+                "templates": [
+                    {
+                        "name": "Top 20 AWS APIs",
+                        "desc": "Top 20 AWS APIs by the number of calls in your account",
+                        "sql": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' GROUP BY Service, Resource ORDER BYCOUNT() DESC LIMIT 20"
+                    },
+                    {
+                        "name": "CloudWatch APIs sorted by calls",
+                        "desc": "CloudWatch APIs sorted by calls",
+                        "sql": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' AND Service = 'CloudWatch' GROUP BY Resource ORDER BY COUNT() DESC"
+                    }
+                ]
+            }
+        ]
+    }
+}

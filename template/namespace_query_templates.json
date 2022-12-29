@@ -1,0 +1,194 @@
+{
+    "cloudwatch_sql": {
+        "ApplicationELB": [
+            {
+                "schema": "AWS/ApplicationELB",
+                "templates": [
+                    {
+                        "name": "Total Requests",
+                        "desc": "Total requests across all load balancers",
+                        "query": "SELECT SUM(RequestCount) FROM SCHEMA(\"AWS/ApplicationELB\", LoadBalancer)"
+                    },
+                    {
+                        "name": "Active Connections Count",
+                        "desc": "Top 10 most active load balancers",
+                        "query": "SELECT MAX(ActiveConnectionCount) FROM SCHEMA(\"AWS/ApplicationELB\", LoadBalancer) GROUP BY LoadBalancer ORDER BY SUM() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "DynamoDB": [
+            {
+                "schema": "AWS/DynamoDB",
+                "templates": [
+                    {
+                        "name": "Top 10 Consumed Reads Tables",
+                        "desc": "Top 10 tables by consumed reads",
+                        "query": "SELECT SUM(ProvisionedWriteCapacityUnits) FROM SCHEMA(\"AWS/DynamoDB\", TableName) GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 Returned Bytes Tables",
+                        "desc": "Top 10 tables by returned bytes",
+                        "query": "SELECT SUM(ReturnedBytes) FROM SCHEMA(\"AWS/DynamoDB\", TableName)  GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 tables by user errors",
+                        "desc": "Top 10 tables by user errors",
+                        "query": "SELECT SUM(UserErrors) FROM SCHEMA(\"AWS/DynamoDB\", TableName) GROUP BY TableName ORDER BY MAX() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "Lambda": [
+            {
+                "schema": "AWS/Lambda",
+                "templates": [
+                    {
+                        "name": "Number of Invocations",
+                        "desc": "Lambda functions ordered by number of invocations",
+                        "query": "SELECT SUM(Invocations) FROM SCHEMA(\"AWS/Lambda\",FunctionName) GROUP BY FunctionName ORDER BY SUM() DESC"
+                    },
+                    {
+                        "name": "Top 10 Longest Runtime Func",
+                        "desc": "Top 10 Lambda functions by longest runtime",
+                        "query": "SELECT AVG(Duration) FROM SCHEMA(\"AWS/Lambda\",FunctionName) GROUP BY FunctionName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 Error Count Func",
+                        "desc": "Top 10 Lambda functions by error count",
+                        "query": "SELECT SUM(Errors) FROM SCHEMA(\"AWS/Lambda\", FunctionName) GROUP BY FunctionName ORDER BY SUM() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "API": [
+            {
+                "schema": "AWS/Usage",
+                "templates": [
+                    {
+                        "name": "Top 20 AWS APIs",
+                        "desc": "Top 20 AWS APIs by the number of calls in your account",
+                        "query": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' GROUP BY Service, Resource ORDER BY COUNT() DESC LIMIT 20"
+                    },
+                    {
+                        "name": "CloudWatch APIs sorted by calls",
+                        "desc": "CloudWatch APIs sorted by calls",
+                        "query": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' AND Service = 'CloudWatch' GROUP BY Resource ORDER BY COUNT() DESC"
+                    }
+                ]
+            }
+        ],
+        "EBS": [
+            {
+                "schema": "AWS/EBS",
+                "templates": [
+                    {
+                        "name": "Top 10 Amazon EBS volumes",
+                        "desc": "Top 10 Amazon EBS volumes by bytes written",
+                        "query": "SELECT SUM(VolumeWriteBytes) FROM SCHEMA(\"AWS/EBS\", VolumeId) GROUP BY VolumeId ORDER BY SUM() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Average EBS write time",
+                        "desc": "Average Amazon EBS volume write time",
+                        "query": "SELECT AVG(VolumeTotalWriteTime) FROM SCHEMA(\"AWS/EBS\", VolumeId)"
+                    }
+                ]
+            }
+        ],
+        "EC2": [
+            {
+                "schema": "AWS/EBS",
+                "templates": [
+                    {
+                        "name": "Top 10 Highest CPU util. instances",
+                        "desc": "Top 10 instances by highest CPU utilization",
+                        "query": "SELECT AVG(CPUUtilization) FROM SCHEMA(\"AWS/EC2\", InstanceId) GROUP BY InstanceId ORDER BY AVG() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "CPU across entire fleet",
+                        "desc": "Average CPU utilization across the entire fleet",
+                        "query": "SELECT AVG(CPUUtilization) FROM SCHEMA(\"AWS/EC2\", InstanceId)"
+                    },
+                    {
+                        "name": "Highest utilization CPU instances",
+                        "desc": "CPU utilization of EC2 instances sorted by highest ",
+                        "query": "SELECT AVG(CPUUtilization) FROM SCHEMA(\"AWS/EC2\", InstanceId) GROUP BY InstanceId ORDER BY AVG() DESC"
+                    }
+                ]
+            }
+        ],
+        "ECS": [
+            {
+                "schema": "AWS/ECS",
+                "templates": [
+                    {
+                        "name": "Top 10 clusters by memory",
+                        "desc": "Top 10 clusters by memory utilization",
+                        "query": "SELECT AVG(MemoryUtilization) FROM SCHEMA(\"AWS/ECS\", ClusterName) GROUP BY ClusterName ORDER BY AVG() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 clusters by cpu",
+                        "desc": "Top 10 services by CPU utilization",
+                        "query": "SELECT AVG(CPUUtilization) FROM SCHEMA(\"AWS/ECS\", ClusterName, ServiceName) GROUP BY ClusterName, ServiceName ORDER BY AVG() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 services",
+                        "desc": "Top 10 services by running tasks (Container Insights)",
+                        "query": "SELECT AVG(RunningTaskCount) FROM SCHEMA(\"ECS/ContainerInsights\", ClusterName, ServiceName) GROUP BY ClusterName, ServiceName ORDER BY AVG() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Avg. CPU util ECS Cluster",
+                        "desc": "Average CPU utilization across all ECS clusters",
+                        "query": "SELECT AVG(CPUUtilization) FROM SCHEMA(\"AWS/ECS\", ClusterName)"
+                    }
+                ]
+            }
+        ],
+        "S3": [
+            {
+                "schema": "AWS/S3",
+                "templates": [
+                    {
+                        "name": "Average latency by bucket",
+                        "desc": "Average latency by bucket",
+                        "query": "SELECT AVG(TotalRequestLatency) FROM SCHEMA(\"AWS/S3\", BucketName, FilterId) WHERE FilterId = 'EntireBucket' GROUP BY BucketName ORDER BY AVG() DESC"
+                    },
+                    {
+                        "name": "Top 10 buckets",
+                        "desc": "Top 10 buckets by bytes downloaded",
+                        "query": "SELECT SUM(BytesDownloaded) FROM SCHEMA(\"AWS/S3\", BucketName, FilterId) WHERE FilterId = 'EntireBucket' GROUP BY BucketName ORDER BY SUM() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "SQS": [
+            {
+                "schema": "AWS/SQS",
+                "templates": [
+                    {
+                        "name": "Top 10 most active queues",
+                        "desc": "Top 10 most active queues",
+                        "query": "SELECT SUM(NumberOfMessagesSent) FROM SCHEMA(\"AWS/SQS\", QueueName) GROUP BY QueueName ORDER BY SUM() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 queues by age",
+                        "desc": "Top 10 queues by age of earliest message",
+                        "query": "SELECT AVG(ApproximateAgeOfOldestMessage) FROM SCHEMA(\"AWS/SQS\", QueueName) GROUP BY QueueName ORDER BY AVG() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "Custom": [
+            {
+                "schema": "Custom",
+                "templates": [
+                    {
+                        "name": "Lambda Workload Function",
+                        "desc": "Lambda Workload Metrics - Errors, Duration & Throttles",
+                        "query": "[ \"AWS/Lambda\", \"Errors\", \"FunctionName\", \"workload\" ],[ \".\", \"Duration\", \".\", \".\", { \"yAxis\": \"right\", \"stat\": \"Maximum\" } ],[ \".\", \"Throttles\", \".\", \".\" ]"
+                    }
+                ]
+            }
+        ]
+    }
+}

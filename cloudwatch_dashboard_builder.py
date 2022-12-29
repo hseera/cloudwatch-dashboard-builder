@@ -52,8 +52,8 @@ template_detail = [
 
 
 build_dashboard = [
-    [sg.Text("SQL Queries To Add")],
-    [sg.Table(values=query_list,headings=["Widget Title","SQL"], auto_size_columns=False, col_widths=[22, 40],enable_events=True, key="-SQL_TABLE-",  num_rows=7,justification='left',right_click_menu=['&Right', ['Remove Query','Generate Dashboard JSON']])],
+    [sg.Text("Queries To Add")],
+    [sg.Table(values=query_list,headings=["Widget Title","Queries"], auto_size_columns=False, col_widths=[22, 40],enable_events=True, key="-SQL_TABLE-",  num_rows=7,justification='left',right_click_menu=['&Right', ['Remove Query','Generate Dashboard JSON']])],
     [sg.Text("Cloudwatch Dashbaord JSON")],
     [sg.Multiline(size=(80, 10),key="-DASHBOARD_TEXTBOX-")],
     [sg.Text('Dashboard Name:'), sg.Input("",size=(40, 1),key="-DASHBOARD_NAME_INPUT-"),sg.B("Create Dashboard",size=(20, 1))]]
@@ -102,7 +102,7 @@ json_builder =[
     [sg.B("Load Template",size=(40, 1)),sg.B("Update Template",size=(40, 1))],
     ]
 tabgrp = [[sg.TabGroup([[sg.Tab('Config', config_layout, key='_configtrb_')],
-                        [sg.Tab('Cloudwatch SQL Dashboard Builder', sql_layout, key='_dashboardtrb_')],
+                        [sg.Tab('Cloudwatch Dashboard Builder', sql_layout, key='_dashboardtrb_')],
                         [sg.Tab('Namespace Query Template', json_builder, key='_jsonfile_')]
                         ],key='mytabs', enable_events=True
                        )]]  
@@ -178,12 +178,12 @@ def create_dashboard_function_worker_thread(region_name,dashboard_name, dashboar
 
 #-----------------Cloudwatch Namespace, template, functions-----------------------------------
 def load_json_data():
-    with open('namespace_query_templates.json', 'r') as data:
+    with open('./template/namespace_query_templates.json', 'r') as data:
         json_data =data.read()
     return json_data
 
 def get_template(schema_name):
-        with open('namespace_query_templates.json', 'r') as data:
+        with open('./template/namespace_query_templates.json', 'r') as data:
             sql_data =json.loads(data.read())
             template_list=[]
             for template in sql_data['cloudwatch_sql'][schema_name]:
@@ -194,7 +194,7 @@ def get_template(schema_name):
 
 
 def get_desc(schema_name, Name):
-    with open('namespace_query_templates.json', 'r') as data:
+    with open('./template/namespace_query_templates.json', 'r') as data:
         sql_data =json.loads(data.read())
         template_desc=[]
         for template in sql_data['cloudwatch_sql'][schema_name]:
@@ -205,7 +205,7 @@ def get_desc(schema_name, Name):
 
 
 def load_namespace():
-    with open('namespace_query_templates.json', 'r') as data:
+    with open('./template/namespace_query_templates.json', 'r') as data:
         namespace_list=[]
         sql_data =json.loads(data.read())
         for namespace in sql_data['cloudwatch_sql']:
@@ -252,7 +252,7 @@ def generate_json(region): #generate dsahboard json
 #-----------------Main function------------------------------------
 def main():
     
-    window = sg.Window('AWS Cloudwatch SQL Dashboard Builder', tabgrp)#layout
+    window = sg.Window('AWS Cloudwatch Dashboard Builder', tabgrp)#layout
     global guery_list
 
     region_loop = False
@@ -405,7 +405,7 @@ def main():
                 
         if event == 'Update Template':
             try:
-                with open('namespace_query_templates.json', 'w') as data:
+                with open('./template/namespace_query_templates.json', 'w') as data:
                     data.write(values["-JSONFILE-"])
                 sg.popup("JSON File Successfully Saved")
             except Exception as e:

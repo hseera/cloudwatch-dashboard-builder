@@ -200,7 +200,7 @@ def get_desc(schema_name, Name):
         for template in sql_data['cloudwatch_sql'][schema_name]:
             for name in template['templates']:
                 if  name['name'] == Name:
-                    template_desc.append([name['desc'],name['sql']])
+                    template_desc.append([name['desc'],name['query']])
     return template_desc
 
 
@@ -220,11 +220,19 @@ def generate_json(region): #generate dsahboard json
     metric_start=""
     x=0 #widget x coordinate
     y=0 #widget y coordinate
-    for index, sql_element in enumerate(query_list):
+    for index, sql_element in enumerate(query_list): 
         if (index != len(query_list)-1):
-            metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}},'
+            if sql_element[1].startswith('SELECT'):
+                metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}},'
+            else:
+                metric_element=sql_element[1].replace("\\","")
+                metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": ['+metric_element+'],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}},'
         else:
-            metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x": '+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}}'
+            if sql_element[1].startswith('SELECT'):
+                metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}}'
+            else:
+                metric_element=sql_element[1].replace("\\","")
+                metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": ['+metric_element+'],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}}'
         
         if ((index+1) % 2 == 0):
             y=y+10

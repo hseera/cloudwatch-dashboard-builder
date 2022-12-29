@@ -218,13 +218,20 @@ def generate_json(region): #generate dsahboard json
     root_start='{"widgets": ['
     root_end=']}'    
     metric_start=""
-     
+    x=0 #widget x coordinate
+    y=0 #widget y coordinate
     for index, sql_element in enumerate(query_list):
         if (index != len(query_list)-1):
-            metric_start=metric_start+'{"height": 10,"width": 10,"x": 0,"y": 0,"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}},'
+            metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x":'+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}},'
         else:
-            metric_start=metric_start+'{"height": 10,"width": 10,"x": 0,"y": 0,"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}}'
-            
+            metric_start=metric_start+'{"height": 10,"width": 10,"y": '+str(y)+',"x": '+str(x)+',"type": "metric","properties": {"view": "timeSeries","stacked": false,"metrics": [[ { "expression": "'+sql_element[1]+'", "label": "Query'+str(index+1)+'", "id": "q'+str(index+1)+'" } ]],"region": "'+region+'","stat": "Average","period": 300,"title": "'+sql_element[0]+'"}}'
+        
+        if ((index+1) % 2 == 0):
+            y=y+10
+            x=0
+        else:
+            x=x+10
+        
     dashboard = root_start+metric_start+root_end
     
     return(dashboard)

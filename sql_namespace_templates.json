@@ -68,7 +68,7 @@
                     {
                         "name": "Top 20 AWS APIs",
                         "desc": "Top 20 AWS APIs by the number of calls in your account",
-                        "sql": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' GROUP BY Service, Resource ORDER BYCOUNT() DESC LIMIT 20"
+                        "sql": "SELECT COUNT(CallCount) FROM SCHEMA(\"AWS/Usage\", Class, Resource, Service, Type) WHERE Type = 'API' GROUP BY Service, Resource ORDER BY COUNT() DESC LIMIT 20"
                     },
                     {
                         "name": "CloudWatch APIs sorted by calls",

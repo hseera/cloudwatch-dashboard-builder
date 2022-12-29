@@ -161,6 +161,23 @@
                 ]
             }
         ],
+        "SQS": [
+            {
+                "schema": "AWS/SQS",
+                "templates": [
+                    {
+                        "name": "Top 10 most active queues",
+                        "desc": "Top 10 most active queues",
+                        "query": "SELECT SUM(NumberOfMessagesSent) FROM SCHEMA(\"AWS/SQS\", QueueName) GROUP BY QueueName ORDER BY SUM() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 queues by age",
+                        "desc": "Top 10 queues by age of earliest message",
+                        "query": "SELECT AVG(ApproximateAgeOfOldestMessage) FROM SCHEMA(\"AWS/SQS\", QueueName) GROUP BY QueueName ORDER BY AVG() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
         "Custom": [
             {
                 "schema": "Custom",

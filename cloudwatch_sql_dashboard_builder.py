@@ -1,5 +1,4 @@
 '''
-Useful for sending one or multiple messages to AWS SQS.Especially useful for those using Windows OS.
 The application is build using PySimpleGUI. 
 It expects you have setup the aws id/key in
 Linux:   /home/[username]/.aws
@@ -337,21 +336,21 @@ def main():
         
         if event == 'Add Query': #add sql query to query list for which dashboard needs to be generated
             if values["-QUERY_TEXTBOX-"]=="":
-                sg.popup("No SQL to Add or not selected")
+                sg.popup("No SQL to Add or not selected",title="Add Query")
             else:
                 query_list.append([values["-TEMPLATES_LISTBOX-"][0],values["-QUERY_TEXTBOX-"]])
                 window["-SQL_TABLE-"].update(query_list)
             
         if event == 'Remove Query': #remove sql query from query list if don't need for the dashboard
             if (len(query_list)==0 or values["-SQL_TABLE-"]==[]):
-                sg.popup("No SQL query to remove or not selected")
+                sg.popup("No SQL query to remove or not selected",title="Remove Query")
             else:
                 query_list.pop(values["-SQL_TABLE-"][0])
                 window["-SQL_TABLE-"].update(query_list)
         
         if event == 'Generate Dashboard JSON': #generate Cloudwatch dashboard JSON
             if (len(query_list)==0 or values["-REGION_LISTBOX-"]==[]):
-                sg.popup("Nothing to generate or Region not selected")
+                sg.popup("Nothing to generate or Region not selected",title="Generate Dashboard")
             else:
                 json_result=generate_json(values["-REGION_LISTBOX-"][0])
                 window["-DASHBOARD_TEXTBOX-"].update(json.dumps(json.loads(json_result),indent=4))

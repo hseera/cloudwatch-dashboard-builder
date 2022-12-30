@@ -186,7 +186,7 @@ def get_template(schema_name):
         with open('./template/namespace_query_templates.json', 'r') as data:
             sql_data =json.loads(data.read())
             template_list=[]
-            for template in sql_data['cloudwatch_sql'][schema_name]:
+            for template in sql_data['cloudwatch_template'][schema_name]:
                 for name in template['templates']:
                     template_list.append(name['name'])
         return template_list
@@ -197,7 +197,7 @@ def get_desc(schema_name, Name):
     with open('./template/namespace_query_templates.json', 'r') as data:
         sql_data =json.loads(data.read())
         template_desc=[]
-        for template in sql_data['cloudwatch_sql'][schema_name]:
+        for template in sql_data['cloudwatch_template'][schema_name]:
             for name in template['templates']:
                 if  name['name'] == Name:
                     template_desc.append([name['desc'],name['query']])
@@ -208,7 +208,7 @@ def load_namespace():
     with open('./template/namespace_query_templates.json', 'r') as data:
         namespace_list=[]
         sql_data =json.loads(data.read())
-        for namespace in sql_data['cloudwatch_sql']:
+        for namespace in sql_data['cloudwatch_template']:
             namespace_list.append(namespace)
                     
     return namespace_list

@@ -1,5 +1,5 @@
 {
-    "cloudwatch_sql": {
+    "cloudwatch_template": {
         "ApplicationELB": [
             {
                 "schema": "AWS/ApplicationELB",

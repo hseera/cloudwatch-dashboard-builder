@@ -27,8 +27,8 @@ query_list=[]
 #-----------------GUI Layout--------------------------------    
 Region = [
     [sg.Text("Region Name (Select Region)")],
-    [sg.Listbox(values=[],enable_events=True,size=(22, 8), key="-REGION_LISTBOX-")], 
-    [sg.B("List Regions",size=(21, 1))]
+    [sg.Listbox(values=[],enable_events=True,size=(24, 8), key="-REGION_LISTBOX-")], 
+    [sg.B("List Regions",size=(23, 1))]
     ]
 
 
@@ -47,13 +47,13 @@ namespace_templates = [
 template_detail = [
     [sg.Text("Template Detail")],
     [sg.Multiline(size=(50, 4), enable_events=True, key="-TEMPLTDESC_TEXTBOX-", disabled=True)],
-    [sg.Multiline(size=(50, 5), enable_events=True, key="-QUERY_TEXTBOX-",right_click_menu=['&Right', ['Add Query']])],
+    [sg.Multiline(size=(50, 6), enable_events=True, key="-QUERY_TEXTBOX-",right_click_menu=['&Right', ['Add Query']])],
     ]
 
 
 build_dashboard = [
     [sg.Text("Queries To Add")],
-    [sg.Table(values=query_list,headings=["Widget Title","Queries"], auto_size_columns=False, col_widths=[22, 40],enable_events=True, key="-SQL_TABLE-",  num_rows=7,justification='left',right_click_menu=['&Right', ['Remove Query','Generate Dashboard JSON']])],
+    [sg.Table(values=query_list,headings=["Widget Title","Queries"], auto_size_columns=False, col_widths=[22, 41],enable_events=True, key="-SQL_TABLE-",  num_rows=7,justification='left',right_click_menu=['&Right', ['Remove Query','Generate Dashboard JSON']])],
     [sg.Text("Cloudwatch Dashbaord JSON")],
     [sg.Multiline(size=(80, 10),key="-DASHBOARD_TEXTBOX-")],
     [sg.Text('Dashboard Name:'), sg.Input("",size=(40, 1),key="-DASHBOARD_NAME_INPUT-"),sg.B("Create Dashboard",size=(20, 1))]]
@@ -122,7 +122,7 @@ def list_dashboards(REGION_NAME):
     CLIENT = session.client('cloudwatch', config=REGION_CONFIG)  
     response = CLIENT.list_dashboards()
     dashboard_list=[]
-    
+    print(response)
     for dashboard in response['DashboardEntries']:
         dashboard_list.append(dashboard['DashboardName'])
     return dashboard_list

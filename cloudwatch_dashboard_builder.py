@@ -24,7 +24,7 @@ session = boto3.session.Session()
 sg.theme('Reddit')
 query_list=[]
 
-#Th TIP string for the namespace template.
+#The TIP string for the namespace template.
 json_template_tip='''TIP:
     
     1: Cloudwatch_template, schema, templates, name, desc & query are keywords for the namespace template.
@@ -32,6 +32,7 @@ json_template_tip='''TIP:
 '''
 
 
+#The TIP string for connecting to AWS account.
 connection_tip ='''TIP:
     If you don't want to enter id, key & region, make sure this information is located in the following location:
     Linux:   /home/[username]/.aws
@@ -110,20 +111,20 @@ config =[
     [sg.B("Reset",size=(28, 1)),sg.B("Connect",size=(27, 1))]
     ]
 
-config_tip =[[sg.Multiline(size=(85, 7),key="-CONNECTTIP-",disabled=True)]
+config_tip =[[sg.Multiline(size=(85, 7),key="-CONNECTTIP_TEXTBOX-",disabled=True)]
     ]
 config_layout = [[sg.Column(config),
                   sg.Column(config_tip)]]
 
 json_builder =[
-    [sg.Multiline(size=(155, 6),key="-JSONTIP-",disabled=True)],
+    [sg.Multiline(size=(155, 6),key="-JSONTIP_TEXTBOX-",disabled=True)],
     [sg.Multiline(size=(155, 31),key="-JSONFILE-")],
     [sg.B("Load Template",size=(40, 1)),sg.B("Update Template",size=(40, 1))],
     ]
-tabgrp = [[sg.TabGroup([[sg.Tab('Config', config_layout, key='_configtrb_')],
-                        [sg.Tab('Cloudwatch Dashboard Builder', sql_layout, key='_dashboardtrb_')],
-                        [sg.Tab('Namespace Query Template', json_builder, key='_jsonfiletrb_')]
-                        ],key='mytabs', enable_events=True
+tabgrp = [[sg.TabGroup([[sg.Tab('Config', config_layout, key='_CONFIG_TAB_')],
+                        [sg.Tab('Cloudwatch Dashboard Builder', sql_layout, key='_DASHBOARD_TAB_')],
+                        [sg.Tab('Namespace Query Template', json_builder, key='_NAMESPACE_TAB_')]
+                        ],key='BUILDER_TABS', enable_events=True
                        )]]  
 
 #--------------AWS Sql specific Functions--------------------------------------
@@ -141,7 +142,6 @@ def list_dashboards(REGION_NAME):
     CLIENT = session.client('cloudwatch', config=REGION_CONFIG)  
     response = CLIENT.list_dashboards()
     dashboard_list=[]
-    print(response)
     for dashboard in response['DashboardEntries']:
         dashboard_list.append(dashboard['DashboardName'])
     return dashboard_list
@@ -186,7 +186,7 @@ def create_dashboard_function_worker_thread(region_name,dashboard_name, dashboar
     try:
         response = create_dashboards(region_name,dashboard_name, dashboard_json)
         if 'ResponseMetadata' in response:
-            window.write_event_value('-CONSOLEWRITE-','Dashboard Successfully created')
+            window.write_event_value('-CONSOLEWRITE-','Dashboard %s Successfully created' %(dashboard_name))
         else:
             window.write_event_value('-CONSOLEWRITE-',response)        
     except Exception as e:
@@ -309,24 +309,24 @@ def main():
                 sg.popup(e)
         
         #-------Clicked SQL Dashboard Builder Tab & popluate namespace data---------
-        if event == 'mytabs':
-            activeTab = values['mytabs']
-            if activeTab == '_dashboardtrb_':
+        if event == 'BUILDER_TABS':
+            activeTab = values['BUILDER_TABS']
+            if activeTab == '_DASHBOARD_TAB_':
                 try:
                     namespace_list = load_namespace()
                     window["-NAMESPACES_LISTBOX-"].update(namespace_list)
                 except Exception as e:
                     window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
-            if activeTab == '_jsonfiletrb_':
+            if activeTab == '_NAMESPACE_TAB_':
                 try:
-                    window["-JSONTIP-"].update(json_template_tip)
+                    window["-JSONTIP_TEXTBOX-"].update(json_template_tip)
                 except Exception as e:
-                    window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
-            if activeTab == '_configtrb_':
+                    window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
+            if activeTab == '_CONFIG_TAB_':
                 try:
-                    window["-CONNECTTIP-"].update(connection_tip)
+                    window["-CONNECTTIP_TEXTBOX-"].update(connection_tip)
                 except Exception as e:
-                    window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
+                    window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
             
             
         #---------Send SQL Message Tab------------------------

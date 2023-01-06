@@ -76,7 +76,7 @@ build_dashboard = [
 
 Console = [
     [sg.Text("Existing Dashboards")],
-    [sg.Listbox(values=[], enable_events=True, size=(65, 8), key="-DASHBOARD_LISTBOX-",right_click_menu=['&Right', ['Refresh']])],
+    [sg.Listbox(values=[], enable_events=True, size=(65, 8), key="-DASHBOARD_LISTBOX-",right_click_menu=['&Right', ['Refresh','Show Existing Dashboards']])],
     [sg.Text("Console")],
     [sg.Multiline(size=(65, 12),key="-CONSOLEMSG_TEXTBOX-",disabled=True)],
     [sg.B("Clear Console",size=(26, 1)),sg.B("Save Console",size=(26, 1))]
@@ -89,12 +89,11 @@ sql_builder=[
 
 sql_layout = [
     [
-        
+        sg.Column(Region),
+        sg.VSeperator(),
         sg.Column(namespaces),
         sg.Column(namespace_templates),
-        sg.Column(template_detail),
-        sg.VSeperator(),
-        sg.Column(Region)
+        sg.Column(template_detail)
         ],      
      [
       sg.TabGroup(
@@ -139,6 +138,7 @@ def list_dashboards(REGION_NAME):
         'max_attempts': 3
         }
     )
+    
     CLIENT = session.client('cloudwatch', config=REGION_CONFIG)  
     response = CLIENT.list_dashboards()
     dashboard_list=[]
@@ -167,10 +167,11 @@ def create_dashboards(REGION_NAME, DASHBOARD_NAME, DASHBOARD_JSON):
 
 
 
-#get all the AWS regions
+# get all the AWS regions
 def get_az():
     cloudwatch_region = session.get_available_regions('cloudwatch')
     return (cloudwatch_region)
+
 
 #----------------Cloudwatch Dashboard Threading functions--------------------------------------
 
@@ -190,7 +191,10 @@ def create_dashboard_function_worker_thread(region_name,dashboard_name, dashboar
         else:
             window.write_event_value('-CONSOLEWRITE-',response)        
     except Exception as e:
-        window.write_event_value('-CONSOLEWRITE-',e)
+        if 'Unable to locate credentials' in str(e):
+            window.write_event_value('-CONSOLEWRITE-',"Please make sure you have set AWS credentials")
+        else:
+            window.write_event_value('-CONSOLEWRITE-',e)
 
 
 
@@ -263,9 +267,6 @@ def generate_json(region): #generate dsahboard json
     
     return(dashboard)
             
-
-
-
 
 
 #-----------------Main function------------------------------------
@@ -341,13 +342,30 @@ def main():
             except Exception as e:
                 window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True )
                 
-        if event == '-REGION_LISTBOX-':
+        
+        if event =='Show Existing Dashboards':
             try:
+                if not values['-REGION_LISTBOX-']:
+                    window["-CONSOLEMSG_TEXTBOX-"].update("Please select a region\n", append=True)
+                    
+                else:
                     threading.Thread(target=dashboard_function_worker_thread,
                                       args=(values['-REGION_LISTBOX-'][0],
                                             window,),  daemon=True).start()
             except Exception as e:
-                window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
+                if 'NoCredentialsError' in str(e):
+                    window["-CONSOLEMSG_TEXTBOX-"].update("Please make sure you have set AWS credentials\n", append=True)
+                else:
+                    window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
+            
+        
+        # if event == '-REGION_LISTBOX-':
+        #     try:
+        #             threading.Thread(target=dashboard_function_worker_thread,
+        #                               args=(values['-REGION_LISTBOX-'][0],
+        #                                     window,),  daemon=True).start()
+        #     except Exception as e:
+        #         window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
         
         if event == '-NAMESPACES_LISTBOX-': #populate sql templates for selected namespace
             try:
@@ -390,7 +408,6 @@ def main():
             else:
                 json_result=generate_json(values["-REGION_LISTBOX-"][0])
                 window["-DASHBOARD_TEXTBOX-"].update(json.dumps(json.loads(json_result),indent=4))
-          
         
         if event == 'Refresh Namespaces': #refresh namespace list if json file is updated. Reset all other fields too.
             namespace_list = load_namespace()
@@ -404,15 +421,18 @@ def main():
         
         if event == 'Create Dashboard': #make AWS API call to create Cloudwatch dashboard
             try:
+                if (values['-DASHBOARD_NAME_INPUT-']=='' or values["-REGION_LISTBOX-"]==[] or window["-JSONFILE-"]==[]):
+                    window["-CONSOLEMSG_TEXTBOX-"].update("Missing Region or Payload or dashboard name\n", append=True)
+                else:
                     threading.Thread(target=create_dashboard_function_worker_thread,
                                       args=(values['-REGION_LISTBOX-'][0],values['-DASHBOARD_NAME_INPUT-'],
-                                            json_result,
-                                            window,),  daemon=True).start()
+                                            json_result, window,),  daemon=True).start()
             except Exception as e:
-                window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
+                if 'NoCredentialsError' in str(e):
+                    window["-CONSOLEMSG_TEXTBOX-"].update("Please make sure you have set AWS credentials\n", append=True)
+                else:
+                    window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
                 
-                
-        
         if event == 'Refresh': 
             try:
                     threading.Thread(target=dashboard_function_worker_thread,
@@ -445,7 +465,10 @@ def main():
             try:
                 window["-DASHBOARD_LISTBOX-"].update(values['-WRITE-'])
             except Exception as e:
-                window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
+                if 'NoCredentialsError' in str(e):
+                    window["-CONSOLEMSG_TEXTBOX-"].update("Please make sure you have set AWS credentials\n", append=True)
+                else: 
+                    window["-CONSOLEMSG_TEXTBOX-"].update(str(e)+"\n", append=True)
         
         if event == '-CONSOLEWRITE-':
             try:

@@ -24,6 +24,21 @@ session = boto3.session.Session()
 sg.theme('Reddit')
 query_list=[]
 
+#Th TIP string for the namespace template.
+json_template_tip='''TIP:
+    
+    1: Cloudwatch_template, schema, templates, name, desc & query are keywords for the namespace template.
+    2: Make sure double quotes are escaped.
+'''
+
+
+connection_tip ='''TIP:
+    If you don't want to enter id, key & region, make sure this information is located in the following location:
+    Linux:   /home/[username]/.aws
+    Windows: /Users/[username]/.aws
+
+'''
+
 #-----------------GUI Layout--------------------------------    
 Region = [
     [sg.Text("Region Name (Select Region)")],
@@ -95,15 +110,19 @@ config =[
     [sg.B("Reset",size=(28, 1)),sg.B("Connect",size=(27, 1))]
     ]
 
-config_layout = [[sg.Column(config)]]
+config_tip =[[sg.Multiline(size=(85, 7),key="-CONNECTTIP-",disabled=True)]
+    ]
+config_layout = [[sg.Column(config),
+                  sg.Column(config_tip)]]
 
 json_builder =[
-    [sg.Multiline(size=(155, 37),key="-JSONFILE-")],
+    [sg.Multiline(size=(155, 6),key="-JSONTIP-",disabled=True)],
+    [sg.Multiline(size=(155, 31),key="-JSONFILE-")],
     [sg.B("Load Template",size=(40, 1)),sg.B("Update Template",size=(40, 1))],
     ]
 tabgrp = [[sg.TabGroup([[sg.Tab('Config', config_layout, key='_configtrb_')],
                         [sg.Tab('Cloudwatch Dashboard Builder', sql_layout, key='_dashboardtrb_')],
-                        [sg.Tab('Namespace Query Template', json_builder, key='_jsonfile_')]
+                        [sg.Tab('Namespace Query Template', json_builder, key='_jsonfiletrb_')]
                         ],key='mytabs', enable_events=True
                        )]]  
 
@@ -296,6 +315,16 @@ def main():
                 try:
                     namespace_list = load_namespace()
                     window["-NAMESPACES_LISTBOX-"].update(namespace_list)
+                except Exception as e:
+                    window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
+            if activeTab == '_jsonfiletrb_':
+                try:
+                    window["-JSONTIP-"].update(json_template_tip)
+                except Exception as e:
+                    window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
+            if activeTab == '_configtrb_':
+                try:
+                    window["-CONNECTTIP-"].update(connection_tip)
                 except Exception as e:
                     window["-CONSOLEMSG_TEXTBOX-"].update("JSON File "+str(e)+"\n", append=True)
             

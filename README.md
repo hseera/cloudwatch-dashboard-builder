@@ -10,3 +10,6 @@ In the beginning, I used to write these queries in a notepad. From time to time,
 The CloudWatch Dashboard Builder tool gives you the capability to generate a dashboard template using different queries. Queries can use SQL expressions for metrics. You can either directly create the dashboard from the tool or copy the dashboard JSON and create it via console/CLI.
 
 https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4
+
+
+To learn about how to use this tool, I have written a [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi)

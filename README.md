@@ -1,4 +1,5 @@
-# CloudWatch Dashboard Builder
+# CloudWatch Dashboard Builder ![Language Python](https://img.shields.io/badge/%20Language-python-blue.svg) [![Apache License](http://img.shields.io/badge/License-Apache-blue.png)](LICENSE) [![GitHub Last Commits](https://img.shields.io/github/last-commit/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/commits/) [![GitHub Size](https://img.shields.io/github/repo-size/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/) 
+
 Generate a time-series Cloudwatch Dashboard template from Cloudwatch metrics (including sql expressions).
 
 ![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")

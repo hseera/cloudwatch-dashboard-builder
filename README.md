@@ -1,6 +1,7 @@
 # CloudWatch Dashboard Builder ![Language Python](https://img.shields.io/badge/%20Language-python-blue.svg) [![Apache License](http://img.shields.io/badge/License-Apache-blue.png)](LICENSE) [![GitHub Last Commits](https://img.shields.io/github/last-commit/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/commits/) [![GitHub Size](https://img.shields.io/github/repo-size/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/) 
 
-Generate a time-series metrics CloudWatch dashboard template from different AWS Namespaces. Metric query can include sql expressions too.
+Generate a time-series metrics CloudWatch dashboard template from different AWS Namespaces. Metric query can include sql expressions too. A useful and handy tool for SRE, Performance Engineers and DevOps working with AWS services.
+
 ![Cloudwatch-dashboard-builder](https://user-images.githubusercontent.com/59352356/212447790-8891e0c1-a61f-4e62-8868-9aa28512c544.gif)
 
 <!-- ![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")-->
@@ -12,7 +13,12 @@ In the beginning, I used to write these queries in a notepad. From time to time,
 
 The CloudWatch Dashboard Builder gives you the capability to generate a time series dashboard template from various predefined metric queries that come with the tool or a custom ones. SQL expressions can be used in metric queries too. Also you can create the dashboard directly from the tool or copy the JSON and create it through the console/CLI. A useful tool to have if you work in Observability space and with AWS services.
 
-
+## Features
+- Customizable Namespace template
+- Pre-build metric query templates for different AWS Namespaces
+- Create CloudWatch dashboard directly from the tool
+- List existing CloudWatch dashboards
+- Dashboard template creation with a single click
 
 ## Requirements
 - You must have an [Amazon Web Services (AWS) account](https://aws.amazon.com/).
@@ -90,11 +96,12 @@ There are a couple of caveats that need to be taken into account.
 - Capability to add Log Insights metrics
 - Extend the tool to Azure and Google Cloud
 - Ability to build metric query within the tool
+- Capability to save dashboard template for future use
 
-## Tool In Action & Blog post
-Here is a video showing how to use it. Also there is a [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi) on how to use the tool.
+## Blog post
+- How to use CloudWatch Dashboard Builder [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi).
 
-https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4
+<!--Here is a video showing how to use it. https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4 -->
 
 ## Who talks about the CloudWatch Dashboard Builder
 - AWS Open Source newsletter - https://dev.to/aws/aws-open-source-newsletter-140-1ie8

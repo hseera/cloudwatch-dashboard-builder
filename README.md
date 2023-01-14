@@ -1,8 +1,9 @@
 # CloudWatch Dashboard Builder ![Language Python](https://img.shields.io/badge/%20Language-python-blue.svg) [![Apache License](http://img.shields.io/badge/License-Apache-blue.png)](LICENSE) [![GitHub Last Commits](https://img.shields.io/github/last-commit/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/commits/) [![GitHub Size](https://img.shields.io/github/repo-size/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/) 
 
-Generate a time-series Cloudwatch Dashboard template from Cloudwatch metrics (including sql expressions).
+Generate a time-series metrics CloudWatch dashboard template from different AWS Namespaces. Metric query can include sql expressions too.
+![Cloudwatch-dashboard-builder](https://user-images.githubusercontent.com/59352356/212447790-8891e0c1-a61f-4e62-8868-9aa28512c544.gif)
 
-![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")
+<!-- ![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")-->
 
 # Background
 For over five years, I have been using the AWS CloudWatch service for monitoring and troubleshooting application performance. Over that period, I have developed different Cloudwatch metric queries to help me quickly create CloudWatch dashboards or widgets for different AWS services.

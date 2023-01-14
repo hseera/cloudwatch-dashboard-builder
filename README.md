@@ -6,14 +6,29 @@ The CloudWatch Dashboard Builder is a useful and convenient tool for individuals
 
 <!-- ![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")-->
 
-# Background
+## Table of contents
+* [Background](#background)
+* [Features](#features)
+* [Requirements](#requirements)
+* [How to use the code](#how-to-use-the-code)
+* [Tool Caveats](#tool-caveats)
+* [Future Enhancements](#future-enhancements)
+* [Blog post](#blog-post)
+* [Who talks about the CloudWatch Dashboard Builder](#who-talks-about-the-cloudwatch-dashboard-builder)
+* [Contributing](#contributing)
+* [License](#license)
+* [Stargazers over time](#stargazers-over-time)
+
+
+
+## [Background](#background)
 For a period of over five years, I have employed the AWS CloudWatch service for the purpose of monitoring and troubleshooting the performance of applications. Throughout this duration, I have devised various CloudWatch metric queries to facilitate the rapid creation of CloudWatch dashboards for various AWS services.
 
 Initially, I would document these queries in a notepad, and refer to them as necessary when creating CloudWatch dashboards for new projects, clients, or applications. On occasion, I would not have access to CloudWatch, necessitating that I request a colleague to create a widget or dashboard. Prior to making such requests, it was necessary for me to convert the query into JSON format. Due to these factors, I developed a tool for constructing CloudWatch dashboards.
 
 The CloudWatch Dashboard Builder grants the capability to generate a time series dashboard template from a selection of predefined metric queries that are included with the tool, or custom ones. The use of SQL expressions in metric queries is also supported. Additionally, the dashboard can be created directly from the tool, or the JSON can be copied and the dashboard created through the console or CLI. This is a valuable tool for those who work in the realm of observability and utilize AWS services.
 
-## Features
+## [Features](#features)
 - Customizable Namespace template
 - Pre-build metric query templates for different AWS Namespaces
 - Create CloudWatch dashboard directly from the tool
@@ -21,7 +36,7 @@ The CloudWatch Dashboard Builder grants the capability to generate a time series
 - Dashboard template creation with a single click
 - Cability to easily pick and choose AWs namespace metrics
 
-## Requirements
+## [Requirements](#requirements)
 - You must have an [Amazon Web Services (AWS) account](https://aws.amazon.com/).
 - The code was written for:
   - Python 3
@@ -36,7 +51,7 @@ The CloudWatch Dashboard Builder grants the capability to generate a time series
   pip install PySimpleGUI
   ```
 
-## How to use the code
+## [How to use the code](#how-to-use-the-code)
 - Configure your AWS access keys.
 
   **Important:** For security, it is strongly recommend that you use IAM users instead of the root account for AWS access.
@@ -86,36 +101,35 @@ The CloudWatch Dashboard Builder grants the capability to generate a time series
   ![image](https://user-images.githubusercontent.com/59352356/212446672-a3869080-3109-4c1e-a372-329bc752698e.png)
 
   
-## Tool Caveats
+## [Tool Caveats](#tool-caveats)
 There are a couple of caveats that need to be taken into account.
 - Currently there is only Windows executable shared on github.
 - The present version produces only a time series dashboard.
 - Double quotes in the namespace template queries need to be escaped.
 
-## Future Enhancements
+## [Future Enhancements](#future-enhancements)
 - Capability to select other types of graphs
 - Capability to add Log Insights metrics
-- Extend the tool to Azure and Google Cloud
 - Ability to build metric query within the tool
 - Capability to save dashboard template for future use
 
-## Blog post
+## [Blog post](#blog-post)
 - How to use CloudWatch Dashboard Builder [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi).
 
 <!--Here is a video showing how to use it. https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4 -->
 
-## Who talks about the CloudWatch Dashboard Builder
+## [Who talks about the CloudWatch Dashboard Builder](#who-talks-about-the-cloudwatch-dashboard-builder)
 - AWS Open Source newsletter - https://dev.to/aws/aws-open-source-newsletter-140-1ie8
 - TestGuild newsletter - https://www.linkedin.com/pulse/openai-playwright-pipelines-future-more-joe-colantonio
 
-## Contributing
+## [Contributing](#contributing)
 Your contributions are always welcome! 
 
-## License
+## [License](#license)
 The CloudWatch Dashboard Builder is an open-source and free software released under the [APACHE](https://github.com/hseera/cloudwatch-dashboard-builder/blob/main/LICENSE) (Apache License 2.0).
 
 
-## Stargazers over time
+## [Stargazers over time](#stargazers-over-time)
 
 [![Stargazers over time](https://starchart.cc/hseera/cloudwatch-dashboard-builder.svg)](https://starchart.cc/hseera/cloudwatch-dashboard-builder)
 

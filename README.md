@@ -1,17 +1,17 @@
 # CloudWatch Dashboard Builder ![Language Python](https://img.shields.io/badge/%20Language-python-blue.svg) [![Apache License](http://img.shields.io/badge/License-Apache-blue.png)](LICENSE) [![GitHub Last Commits](https://img.shields.io/github/last-commit/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/commits/) [![GitHub Size](https://img.shields.io/github/repo-size/hseera/cloudwatch-dashboard-builder.svg)](https://github.com/hseera/cloudwatch-dashboard-builder/) 
 
-Generate a time-series metrics CloudWatch dashboard template from different AWS Namespaces. Metric query can include sql expressions too. A useful and handy tool for SRE, Performance Engineers and DevOps working with AWS services.
+The CloudWatch Dashboard Builder is a useful and convenient tool for individuals such as Site Reliability Engineers (SREs), Performance Engineers, and DevOps professionals who work with AWS services. It enables the generation of the CloudWatch dashboard template from various AWS Namespaces. The metric query for different AWS namespaces can be in the SQL expression form too.
 
 ![Cloudwatch-dashboard-builder](https://user-images.githubusercontent.com/59352356/212447790-8891e0c1-a61f-4e62-8868-9aa28512c544.gif)
 
 <!-- ![Alt text](/images/cloudwatch-dashboard.png?raw=true "CloudWatch Dashboard Builder")-->
 
 # Background
-For over five years, I have been using the AWS CloudWatch service for monitoring and troubleshooting application performance. Over that period, I have developed different Cloudwatch metric queries to help me quickly create CloudWatch dashboards or widgets for different AWS services.
+For a period of over five years, I have employed the AWS CloudWatch service for the purpose of monitoring and troubleshooting the performance of applications. Throughout this duration, I have devised various CloudWatch metric queries to facilitate the rapid creation of CloudWatch dashboards for various AWS services.
 
-In the beginning, I used to write these queries in a notepad. From time to time, I would refer them to create a CloudWatch dashboard or widget if I needed them for a new project, client, or application. I occasionally lacked access to CloudWatch, so I had to ask a colleague to create a widget or dashboard. Before requesting them, I had to transform the query into JSON format. These reasons led me to create a tool for building CloudWatch dashboards.
+Initially, I would document these queries in a notepad, and refer to them as necessary when creating CloudWatch dashboards for new projects, clients, or applications. On occasion, I would not have access to CloudWatch, necessitating that I request a colleague to create a widget or dashboard. Prior to making such requests, it was necessary for me to convert the query into JSON format. Due to these factors, I developed a tool for constructing CloudWatch dashboards.
 
-The CloudWatch Dashboard Builder gives you the capability to generate a time series dashboard template from various predefined metric queries that come with the tool or a custom ones. SQL expressions can be used in metric queries too. Also you can create the dashboard directly from the tool or copy the JSON and create it through the console/CLI. A useful tool to have if you work in Observability space and with AWS services.
+The CloudWatch Dashboard Builder grants the capability to generate a time series dashboard template from a selection of predefined metric queries that are included with the tool, or custom ones. The use of SQL expressions in metric queries is also supported. Additionally, the dashboard can be created directly from the tool, or the JSON can be copied and the dashboard created through the console or CLI. This is a valuable tool for those who work in the realm of observability and utilize AWS services.
 
 ## Features
 - Customizable Namespace template
@@ -19,6 +19,7 @@ The CloudWatch Dashboard Builder gives you the capability to generate a time ser
 - Create CloudWatch dashboard directly from the tool
 - List existing CloudWatch dashboards
 - Dashboard template creation with a single click
+- Cability to easily pick and choose AWs namespace metrics
 
 ## Requirements
 - You must have an [Amazon Web Services (AWS) account](https://aws.amazon.com/).

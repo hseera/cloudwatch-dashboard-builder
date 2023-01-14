@@ -36,6 +36,7 @@ The CloudWatch Dashboard Builder grants the capability to generate a time series
 - Dashboard template creation with a single click
 - Capability to easily pick and choose AWs namespace metrics
 - Inbuild widget layout generation (N x 2 widget layout)
+- Time-series metric widgets only
 
 ## [Requirements](#requirements)
 - You must have an [Amazon Web Services (AWS) account](https://aws.amazon.com/).

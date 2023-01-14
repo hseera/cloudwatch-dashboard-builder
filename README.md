@@ -95,4 +95,10 @@ Here is a video showing how to use it. Also there is a [blog post](https://dev.t
 https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4
 
 
+## License
 
+The CloudWatch Dashboard Builder is an open-source and free software released under the [APACHE](https://github.com/hseera/cloudwatch-dashboard-builder/blob/main/LICENSE) (Apache License 2.0).
+
+## Who talks about the CloudWatch Dashboard Builder
+- AWS Open Source newsletter - https://dev.to/aws/aws-open-source-newsletter-140-1ie8
+- TestGuild newsletter - https://www.linkedin.com/pulse/openai-playwright-pipelines-future-more-joe-colantonio

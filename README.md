@@ -34,7 +34,8 @@ The CloudWatch Dashboard Builder grants the capability to generate a time series
 - Create CloudWatch dashboard directly from the tool
 - List existing CloudWatch dashboards
 - Dashboard template creation with a single click
-- Cability to easily pick and choose AWs namespace metrics
+- Capability to easily pick and choose AWs namespace metrics
+- Inbuild widget layout generation (Nx2 layout)
 
 ## [Requirements](#requirements)
 - You must have an [Amazon Web Services (AWS) account](https://aws.amazon.com/).
@@ -112,6 +113,7 @@ There are a couple of caveats that need to be taken into account.
 - Capability to add Log Insights metrics
 - Ability to build metric query within the tool
 - Capability to save dashboard template for future use
+- Ability to decide on the widget layout
 
 ## [Blog post](#blog-post)
 - How to use CloudWatch Dashboard Builder [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi).

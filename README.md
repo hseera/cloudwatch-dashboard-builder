@@ -55,12 +55,17 @@ The CloudWatch Dashboard Builder gives you the capability to generate a time ser
   ![image](https://user-images.githubusercontent.com/59352356/212445835-2619912b-3460-4770-89fe-b6bca13518b7.png)
 
 
-
-
+## Tool Caveats
+There are a couple of caveats that need to be taken into account.
+- Currently there is only Windows executable shared on github.
+- The present version produces only a time series dashboard.
+- Double quotes in the namespace template queries need to be escaped.
 
 ## Future Enhancements
-
-
+- Capability to select other types of graphs
+- Capability to add Log Insights metrics
+- Extend the tool to Azure and Google Cloud
+- Ability to build metric query within the tool
 
 ## Tool In Action & Blog post
 Here is a video showing how to use it. Also there is a [blog post](https://dev.to/aws-builders/aws-cloudwatch-dashboard-builder-tool-for-sre-performance-engineers-and-devops-29bi) on how to use the tool.

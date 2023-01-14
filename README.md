@@ -17,8 +17,6 @@ The CloudWatch Dashboard Builder is a useful and convenient tool for individuals
 * [Who talks about the CloudWatch Dashboard Builder](#who-talks-about-the-cloudwatch-dashboard-builder)
 * [Contributing](#contributing)
 * [License](#license)
-* [Stargazers over time](#stargazers-over-time)
-
 
 
 ## [Background](#background)
@@ -131,8 +129,4 @@ Your contributions are always welcome!
 ## [License](#license)
 The CloudWatch Dashboard Builder is an open-source and free software released under the [APACHE](https://github.com/hseera/cloudwatch-dashboard-builder/blob/main/LICENSE) (Apache License 2.0).
 
-
-## [Stargazers over time](#stargazers-over-time)
-
-[![Stargazers over time](https://starchart.cc/hseera/cloudwatch-dashboard-builder.svg)](https://starchart.cc/hseera/cloudwatch-dashboard-builder)
 

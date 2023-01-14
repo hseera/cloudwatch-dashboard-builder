@@ -37,20 +37,34 @@ The CloudWatch Dashboard Builder gives you the capability to generate a time ser
 
   Setting your credentials for use by the AWS SDK for Python can be done in a number of ways, but here are the recommended approaches:
   - The default credential profiles file.
-  Set credentials in the AWS credentials profile file on your local system, located at:
-    - ```~/.aws/credentials``` on Linux, macOS, or Unix.
-    - ```C:\Users\USERNAME\.aws\credentials``` on Windows.
+    Set credentials in the AWS credentials profile file on your local system, located at:
+      - ```~/.aws/credentials``` on Linux, macOS, or Unix.
+      - ```C:\Users\USERNAME\.aws\credentials``` on Windows.
 
-  This file should contain lines in the following format:
-  ```
-    [default]
-    aws_access_key_id = <YOUR_ACCESS_KEY_ID>
-    aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
-   ```
-  Replace the values of ```<YOUR_ACCESS_KEY_ID>``` and ```<YOUR_SECRET_ACCESS_KEY>``` by your AWS credentials. 
+    This file should contain lines in the following format:
+    ```
+      [default]
+      aws_access_key_id = <YOUR_ACCESS_KEY_ID>
+      aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
+    ```
+    Replace the values of ```<YOUR_ACCESS_KEY_ID>``` and ```<YOUR_SECRET_ACCESS_KEY>``` by your AWS credentials. 
   
-  ![image](https://user-images.githubusercontent.com/59352356/212445731-3dcef972-1f75-4437-85eb-6bb088a3d32c.png)
-- Credential information in the tool
+    ![image](https://user-images.githubusercontent.com/59352356/212445731-3dcef972-1f75-4437-85eb-6bb088a3d32c.png)
+  
+    Make sure you also set a default region.
+    Set region in the AWS config file on your local system, located at:
+    - ```~/.aws/config``` on Linux, macOS, or Unix.
+    - ```C:\Users\USERNAME\.aws\config``` on Windows.
+
+    This file should contain lines in the following format:
+    ```
+      [default]
+      region = <YOUR_DEFAULT_REGION>
+     ```
+    Replace the value of ```<YOUR_DEFAULT_REGION>``` with your default AWS region. 
+    ![image](https://user-images.githubusercontent.com/59352356/212446270-2a9d48b3-4454-4765-b228-7ddab70642a4.png)
+
+- Credential and region information in the tool
   Set AWS credentials in the tool with default region.
   ![image](https://user-images.githubusercontent.com/59352356/212445835-2619912b-3460-4770-89fe-b6bca13518b7.png)
 

@@ -35,8 +35,8 @@ json_template_tip='''TIP:
 #The TIP string for connecting to AWS account.
 connection_tip ='''TIP:
     If you don't want to enter id, key & region, make sure this information is located in the following location:
-    Linux:   /home/[username]/.aws
-    Windows: /Users/[username]/.aws
+    Linux:   ~/.aws/credentials
+    Windows: C:/Users/[username]/.aws/credentials
 
 '''
 

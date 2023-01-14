@@ -85,7 +85,7 @@ Console = [
 dashboard_builder =[[sg.Column(build_dashboard)]]
 
 sql_builder=[
-    [sg.Text("Not Yet Implemented")]]
+    [sg.Image("./images/under-construction.png",size=(500,350))]]
 
 sql_layout = [
     [
@@ -98,7 +98,7 @@ sql_layout = [
      [
       sg.TabGroup(
          [[sg.Tab('Dashboard Builder', dashboard_builder)],
-          [sg.Tab('Query Builder', sql_builder)]]),
+          [sg.Tab('SQL Query Builder', sql_builder)]]),
         sg.VSeperator(),
         sg.Column(Console)]   
 ]

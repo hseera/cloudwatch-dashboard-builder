@@ -178,6 +178,45 @@
                 ]
             }
         ],
+        "EventBridge": [
+            {
+                "schema": "AWS/Events",
+                "templates": [
+                    {
+                        "name": "Top 10 rules by invocations",
+                        "desc": "Top 10 rules by invocations",
+                        "query": "SELECT SUM(Invocations) FROM SCHEMA(\"AWS/Events\", RuleName) GROUP BY RuleName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 rules by failed invocations",
+                        "desc": "Top 10 rules by failed invocations",
+                        "query": "SELECT SUM(FailedInvocations) FROM SCHEMA(\"AWS/Events\", RuleName) GROUP BY RuleName ORDER BY MAX() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 rules by matched rules",
+                        "desc": "Top 10 rules by matched rules",
+                        "query": "SELECT SUM(MatchedEvents) FROM SCHEMA(\"AWS/Events\", RuleName) GROUP BY RuleName ORDER BY MAX() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
+        "Kinesis": [
+            {
+                "schema": "AWS/Kinesis",
+                "templates": [
+                    {
+                        "name": "Top 10 streams by bytes written",
+                        "desc": "Top 10 streams by bytes written",
+                        "query": "SELECT SUM(\"PutRecords.Bytes\") FROM SCHEMA(\"AWS/Kinesis\", StreamName) GROUP BY StreamName ORDER BY SUM() DESC LIMIT 10"
+                    },
+                    {
+                        "name": "Top 10 streams by earliest items in the stream",
+                        "desc": "Top 10 streams by earliest items in the stream",
+                        "query": "SELECT MAX(\"GetRecords.IteratorAgeMilliseconds\") FROM SCHEMA(\"AWS/Kinesis\", StreamName) GROUP BY StreamName ORDER BY MAX() DESC LIMIT 10"
+                    }
+                ]
+            }
+        ],
         "Custom": [
             {
                 "schema": "Custom",

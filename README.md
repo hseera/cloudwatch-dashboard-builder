@@ -64,11 +64,19 @@ The CloudWatch Dashboard Builder gives you the capability to generate a time ser
     Replace the value of ```<YOUR_DEFAULT_REGION>``` with your default AWS region. 
     ![image](https://user-images.githubusercontent.com/59352356/212446270-2a9d48b3-4454-4765-b228-7ddab70642a4.png)
 
-- Credential and region information in the tool
-  Set AWS credentials in the tool with default region.
-  ![image](https://user-images.githubusercontent.com/59352356/212445835-2619912b-3460-4770-89fe-b6bca13518b7.png)
+  - Credential and region information in the tool
+    Set AWS credentials in the tool with default region.
+    ![image](https://user-images.githubusercontent.com/59352356/212445835-2619912b-3460-4770-89fe-b6bca13518b7.png)
 
+- Run the code.
+  For windows, the github repo already has an executable file that can be [downloaded](https://github.com/hseera/cloudwatch-dashboard-builder/blob/main/cloudwatch_dashboard_builder.zip) and executed. Otherwise run the application as follows:
+  ```
+  python cloudwatch-dashboard-builder.py
+  ```
+  On successful execution of the code, you will see the configuation screen.
+  ![image](https://user-images.githubusercontent.com/59352356/212446672-a3869080-3109-4c1e-a372-329bc752698e.png)
 
+  
 ## Tool Caveats
 There are a couple of caveats that need to be taken into account.
 - Currently there is only Windows executable shared on github.

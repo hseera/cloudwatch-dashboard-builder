@@ -20,11 +20,11 @@ The CloudWatch Dashboard Builder is a useful and convenient tool for individuals
 
 
 ## [Background](#background)
-For a period of over five years, I have employed the AWS CloudWatch service for the purpose of monitoring and troubleshooting the performance of applications. Throughout this duration, I have devised various CloudWatch metric queries to facilitate the rapid creation of CloudWatch dashboards for various AWS services.
+I have been using the AWS CloudWatch service for close to 10 years for the purpose of monitoring and troubleshooting the performance of applications hosted on AWS. Throughout this period, I have devised various CloudWatch metric queries to facilitate the rapid creation of CloudWatch dashboards for various AWS services.
 
-Initially, I would document these queries in a notepad, and refer to them as necessary when creating CloudWatch dashboards for new projects, clients, or applications. On occasion, I would not have access to CloudWatch, necessitating that I request a colleague to create a widget or dashboard. Prior to making such requests, it was necessary for me to convert the query into JSON format. Due to these factors, I developed a tool for constructing CloudWatch dashboards.
+Initially, I would document these queries in a notepad, and refer to them as necessary when creating CloudWatch dashboards for new projects, clients, or applications. On occasion, I would not have access to CloudWatch, necessitating that I request a colleague to create a widget or dashboard. Prior to making such requests, it was necessary for me to convert the query into JSON format. Due to these factors and introduction of SQL expression for metrics, I developed a tool for constructing CloudWatch dashboards.
 
-The CloudWatch Dashboard Builder grants the capability to generate a time series dashboard template from a selection of predefined metric queries that are included with the tool, or custom ones. The use of SQL expressions in metric queries is also supported. Additionally, the dashboard can be created directly from the tool, or the JSON can be copied and the dashboard created through the console or CLI. This is a valuable tool for those who work in the realm of observability and utilize AWS services.
+The CloudWatch Dashboard Builder grants the capability to generate a time series dashboard template from a selection of predefined metric queries that are included with the tool, or custom ones. Additionally, the dashboard can be created directly from the tool, or the JSON can be copied and the dashboard created through the console or CLI. This is a valuable tool for those who work in the realm of observability and utilize AWS services.
 
 ## [Features](#features)
 - Customizable Namespace template

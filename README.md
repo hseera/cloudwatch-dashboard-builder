@@ -120,9 +120,9 @@ There are a couple of caveats that need to be taken into account.
 <!--Here is a video showing how to use it. https://user-images.githubusercontent.com/59352356/210024787-b0e2f0f7-c04b-4512-b9af-71005532feb0.mp4 -->
 
 ## [Who talks about the CloudWatch Dashboard Builder](#who-talks-about-the-cloudwatch-dashboard-builder)
-- AWS Open Source newsletter - https://dev.to/aws/aws-open-source-newsletter-140-1ie8
-- TestGuild newsletter - https://www.linkedin.com/pulse/openai-playwright-pipelines-future-more-joe-colantonio
-
+- [AWS Open Source newsletter](https://dev.to/aws/aws-open-source-newsletter-140-1ie8)
+- [TestGuild newsletter](https://www.linkedin.com/pulse/openai-playwright-pipelines-future-more-joe-colantonio)
+- [AWS Community Builder Series Event - 2023](https://builders-apj.virtual.awsevents.com/media/t/1_u1h4qexv/281518872)
 ## [Contributing](#contributing)
 Your contributions are always welcome! 
 

@@ -26,7 +26,7 @@ sg.theme('Reddit')
 query_list=[]
 
 script_dir = os.path.dirname(__file__)
-file_path=os.path.join(script_dir, "./images/under-construction.png")
+file_path=os.path.join(script_dir, "images\\under-construction.png")
 
 #The TIP string for the namespace template.
 json_template_tip='''TIP:
@@ -205,13 +205,13 @@ def create_dashboard_function_worker_thread(region_name,dashboard_name, dashboar
 
 #-----------------Cloudwatch Namespace, template, functions-----------------------------------
 def load_json_data():
-    file_path=os.path.join(script_dir, './template/namespace_query_templates.json')
+    file_path=os.path.join(script_dir, 'template\\namespace_query_templates.json')
     with open(file_path, 'r') as data:
         json_data =data.read()
     return json_data
 
 def get_template(schema_name):
-    file_path=os.path.join(script_dir, './template/namespace_query_templates.json')
+    file_path=os.path.join(script_dir, 'template\\namespace_query_templates.json')
     with open(file_path, 'r') as data:
         sql_data =json.loads(data.read())
         template_list=[]
@@ -223,7 +223,7 @@ def get_template(schema_name):
 
 
 def get_desc(schema_name, Name):
-    file_path=os.path.join(script_dir, './template/namespace_query_templates.json')
+    file_path=os.path.join(script_dir, 'template\\namespace_query_templates.json')
     with open(file_path, 'r') as data:
         sql_data =json.loads(data.read())
         template_desc=[]
@@ -235,7 +235,7 @@ def get_desc(schema_name, Name):
 
 
 def load_namespace():
-    file_path=os.path.join(script_dir, './template/namespace_query_templates.json')
+    file_path=os.path.join(script_dir, 'template\\namespace_query_templates.json')
     with open(file_path, 'r') as data:
         namespace_list=[]
         sql_data =json.loads(data.read())

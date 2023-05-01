@@ -123,6 +123,7 @@ There are a couple of caveats that need to be taken into account.
 - [AWS Open Source newsletter](https://dev.to/aws/aws-open-source-newsletter-140-1ie8)
 - [TestGuild newsletter](https://www.linkedin.com/pulse/openai-playwright-pipelines-future-more-joe-colantonio)
 - [AWS Community Builder Series Event - 2023](https://builders-apj.virtual.awsevents.com/media/t/1_u1h4qexv/281518872)
+- [Twitter talk](https://twitter.com/mlabouardy/status/1618307774718566408?t=2EPTSyaeR5d3eUR_8yQbEw&s=19)
 ## [Contributing](#contributing)
 Your contributions are always welcome! 
 
